@@ -1,11 +1,10 @@
 from flask import Flask
-from flask import jsonify
 
 app = Flask(__name__)
 
 @app.route('/')
-def ejemplo2():
-    return jsonify(Hola="Desde Flask")
+def hello():
+    return "Hello Wor!"
 
 if __name__ ==  '__main__':
 
