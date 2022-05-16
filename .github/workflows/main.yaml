@@ -3,11 +3,11 @@ name: python flask test CI and deploy
 on:
   push:
     branches:
-      - master
+      - main
 
   pull_request:
     branches:
-      - master
+      - main
 env:
   SERVICE_NAME: julio0619/flask-ci
 
