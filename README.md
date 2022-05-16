@@ -1,3 +1,1 @@
 # flask CI/CD Aplication
-
-
