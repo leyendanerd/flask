@@ -30,7 +30,7 @@ jobs:
           pip install -r requirements.txt
       
       - name: Test with unittest
-        working-directory: src/test
+        working-directory: src
         run: |
           python test.py
 
