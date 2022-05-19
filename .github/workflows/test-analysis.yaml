@@ -32,6 +32,9 @@ jobs:
   analyze:
     name: Analyze CodeQL
     runs-on: ubuntu-latest
+    environment:
+       name: Development
+       url: 'http://neuroticsolutions.com'
     permissions:
       actions: read
       contents: read
