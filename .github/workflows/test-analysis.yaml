@@ -65,6 +65,9 @@ jobs:
     name: Analyze CodeQL
     needs: [run_tests-staging]
     runs-on: ubuntu-latest
+    environment:
+       name: Production
+       url: 'http://neuroticsolutions.com'
     permissions:
       actions: read
       contents: read
