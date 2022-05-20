@@ -86,6 +86,9 @@ jobs:
     name: " Deploy terraform"
     needs: [deploy_staging]
     runs-on: ubuntu-latest
+    environment: 
+      name: Production
+      url: https://nsprod.duckdns.org
     
     steps:
       
