@@ -76,6 +76,7 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           script_stop: true
           script: |
+            cd /home
             docker-compose -f flask.yaml pull
             docker-compose -f flask.yaml up -d
 
