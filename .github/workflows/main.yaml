@@ -48,7 +48,7 @@ jobs:
         uses: docker/login-action@v1 
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_TOKEN }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
       -
         name: Build and push
         uses: docker/build-push-action@v2
@@ -56,11 +56,39 @@ jobs:
           push: true
           tags: ${{ env.SERVICE_NAME }}
    
- 
-  terraform:
-    name: " Deploy terraform"
+  
+
+  deploy_staging:
+    name: Deploy application env staging
     needs: [build_dockerhub]
     runs-on: ubuntu-latest
+    environment: 
+      name: Staging
+      url: https://nstests.duckdns.org
+
+    steps:
+      - name: Connecting to server via ssh
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          port: ${{ secrets.SSH_PORT }}
+          script_stop: true
+          script: |
+            cd /home
+            docker-compose -f flask.yaml pull
+            docker-compose -f flask.yaml up -d
+
+
+
+  deploy_production:
+    name: " Deploy to env production"
+    needs: [deploy_staging]
+    runs-on: ubuntu-latest
+    environment: 
+      name: Production
+      url: https://nsprod.duckdns.org
     
     steps:
       
@@ -92,8 +120,3 @@ jobs:
       - name: Terraform Apply
         working-directory: px-terraform
         run: terraform apply -auto-approve
-
-        
-
-    
-    

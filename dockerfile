@@ -9,4 +9,3 @@ RUN pip install -r /requirements.txt
 COPY /src/app.py /code
 
 CMD ["python3", "app.py"]
-
