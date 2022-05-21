@@ -64,7 +64,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: 
       name: Development
-      url: https://nsdev.duckdns.org
+      url: https://nsdevp.duckdns.org
 
     steps:
       - name: Connecting to server via ssh
