@@ -31,6 +31,7 @@ jobs:
 
   analyze:
     name: Analyze CodeQL
+    needs: [run_tests]
     runs-on: ubuntu-latest
     permissions:
       actions: read
@@ -57,25 +58,24 @@ jobs:
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v2
 
-  deploy_staging:
-    name: Deploy application env dev
+  deploy_Develoment:
+    name: Deploy to env dev
     needs: [run_tests]
     runs-on: ubuntu-latest
     environment: 
       name: Development
-      url: https://nsdev.duckdns.org
+      url: https://nsdevp.duckdns.org
 
     steps:
       - name: Connecting to server via ssh
         uses: appleboy/ssh-action@master
         with:
-          host: ${{ secrets.SSH_HOST_DEV }}
-          username: ${{ secrets.SSH_USERNAME_DEV }}
-          password: ${{ secrets.SSH_PASSWORD_DEV }}
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          password: ${{ secrets.SSH_PASSWORD }}
           port: ${{ secrets.SSH_PORT_DEV }}
           script_stop: true
           script: |
             cd /home
             docker-compose -f flask.yaml pull
             docker-compose -f flask.yaml up -d
-            
