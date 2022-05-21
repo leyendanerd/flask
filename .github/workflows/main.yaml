@@ -59,7 +59,7 @@ jobs:
   
 
   deploy_staging:
-    name: Deploy application to the server
+    name: Deploy application env staging
     needs: [build_dockerhub]
     runs-on: ubuntu-latest
     environment: 
@@ -82,8 +82,8 @@ jobs:
 
 
 
-  terraform:
-    name: " Deploy terraform"
+  deploy_production:
+    name: " Deploy to env production"
     needs: [deploy_staging]
     runs-on: ubuntu-latest
     environment: 
