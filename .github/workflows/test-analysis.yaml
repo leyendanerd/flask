@@ -31,7 +31,7 @@ jobs:
 
   analyze:
     name: Analyze CodeQL
-    needs: [run_test]
+    needs: [run_tests]
     runs-on: ubuntu-latest
     permissions:
       actions: read
