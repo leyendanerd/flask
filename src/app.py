@@ -4,7 +4,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def hello():
-    return "Hello World! pruebas finales"
+    return "Hello World! pruebas finales kubernetes"
 
 if __name__ ==  '__main__':
 
